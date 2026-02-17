@@ -19,11 +19,9 @@ body{
   padding:24px;
   overflow:hidden;
 
-  /* ✅ 오버레이를 줄여서 배경 사진이 더 살아나게 */
-  --overlay: 0.12;
-
+  /* 배경 오버레이는 최소화 */
   background-image:
-    linear-gradient(rgba(0,0,0,var(--overlay)), rgba(0,0,0,var(--overlay))),
+    linear-gradient(rgba(0,0,0,0.1), rgba(0,0,0,0.1)),
     url("01.jpg");
   background-size:cover;
   background-position:center;
@@ -33,18 +31,11 @@ body{
   font-family: system-ui, -apple-system, "Apple SD Gothic Neo", "Noto Sans KR", sans-serif;
 }
 
+/* 🔥 카드 투명도 10% */
 .card{
   width:100%;
   max-width:420px;
-
-  /* ✅ 모바일에서 '확실히' 반투명 체감되도록 알파값을 낮춤 */
-  background: rgba(255,255,255,0.28);
-
-  /* blur는 지원하면 유리 느낌, 미지원이면 그냥 투명 */
-  -webkit-backdrop-filter: blur(10px);
-  backdrop-filter: blur(10px);
-
-  border: 1px solid rgba(255,255,255,0.35);
+  background: rgba(255,255,255,0.1);  /* ✅ 10% */
   border-radius:20px;
   padding:32px;
   text-align:center;
@@ -58,7 +49,7 @@ h1{
   line-height:1.6;
   margin:0 0 24px;
   color:#111;
-  text-shadow: 0 1px 0 rgba(255,255,255,0.35); /* 가독성 살짝 */
+  text-shadow: 0 1px 3px rgba(255,255,255,0.6);
 }
 
 .btn-container{
@@ -136,7 +127,7 @@ h1{
 
   yesBtn.addEventListener("click", () => {
     document.body.style.backgroundImage =
-      'linear-gradient(rgba(0,0,0,var(--overlay)), rgba(0,0,0,var(--overlay))), url("02.jpg")';
+      'linear-gradient(rgba(0,0,0,0.1), rgba(0,0,0,0.1)), url("02.jpg")';
     result.style.display = "block";
     createHearts();
   });
@@ -166,20 +157,18 @@ h1{
     noBtn.style.top  = y + "px";
   }
 
-  // PC: 올리면 도망
   noBtn.addEventListener("mouseenter", moveNo);
 
-  // 모바일: 누르려는 순간 도망
   noBtn.addEventListener("touchstart", (e) => {
     e.preventDefault();
     moveNo();
   }, { passive:false });
 
-  // 클릭도 방지
   noBtn.addEventListener("click", (e) => {
     e.preventDefault();
     moveNo();
   });
+
 })();
 </script>
 </body>
